@@ -21,6 +21,17 @@ class TestVowelCount(unittest.TestCase):
         self.assertEqual(vowel_count("rhythm"), 0)
 
     # Part 2
+from hw1 import short_lists
+
+class TestShortLists(unittest.TestCase):
+    def test_short_lists_with_mixed_lengths(self):
+        self.assertEqual(short_lists([[1, 2], [3], [4, 5], [6, 7, 8]]), [[1, 2], [4, 5]])
+
+    def test_short_lists_with_no_two_element_lists(self):
+        self.assertEqual(short_lists([[1], [3, 4, 5], []]), [])
+
+    def test_short_lists_all_two_element_lists(self):
+        self.assertEqual(short_lists([[10, 20], [30, 40], [50, 60]]), [[10, 20], [30, 40], [50, 60]])
 
 
     # Part 3
