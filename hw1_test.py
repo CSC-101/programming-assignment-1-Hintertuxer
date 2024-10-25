@@ -7,7 +7,18 @@ import unittest
 
 class TestCases(unittest.TestCase):
     # Part 1
+import unittest
+from hw1 import vowel_count
 
+class TestVowelCount(unittest.TestCase):
+    def test_vowel_count_mixed_case(self):
+        self.assertEqual(vowel_count("Hello World"), 3)
+
+    def test_vowel_count_all_vowels(self):
+        self.assertEqual(vowel_count("AEIOUaeiou"), 10)
+
+    def test_vowel_count_no_vowels(self):
+        self.assertEqual(vowel_count("rhythm"), 0)
 
     # Part 2
 
