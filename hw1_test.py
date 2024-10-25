@@ -35,7 +35,17 @@ class TestShortLists(unittest.TestCase):
 
 
     # Part 3
+from hw1 import ascending_pairs
 
+class TestAscendingPairs(unittest.TestCase):
+    def test_ascending_pairs_mixed_lengths(self):
+        self.assertEqual(ascending_pairs([[3, 1], [2, 5, 4], [8, 7], [10]]), [[1, 3], [2, 5, 4], [7, 8], [10]])
+
+    def test_ascending_pairs_with_two_element_lists_only(self):
+        self.assertEqual(ascending_pairs([[1, 2], [4, 3], [3, 3]]), [[1, 2], [3, 4], [3, 3]])
+
+    def test_ascending_pairs_no_two_element_lists(self):
+        self.assertEqual(ascending_pairs([[1, 2, 3], [4], [5, 6, 7]]), [[1, 2, 3], [4], [5, 6, 7]])
 
     # Part 4
 
