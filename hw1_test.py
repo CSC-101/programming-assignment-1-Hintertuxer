@@ -48,6 +48,22 @@ class TestAscendingPairs(unittest.TestCase):
         self.assertEqual(ascending_pairs([[1, 2, 3], [4], [5, 6, 7]]), [[1, 2, 3], [4], [5, 6, 7]])
 
     # Part 4
+from hw1 import add_prices, Price
+
+class TestAddPrices(unittest.TestCase):
+    def test_add_prices_no_cents_overflow(self):
+        price1 = Price(3, 40)
+        price2 = Price(4, 50)
+        result = add_prices(price1, price2)
+        self.assertEqual(result.dollars, 7)
+        self.assertEqual(result.cents, 90)
+
+    def test_add_prices_with_cents_overflow(self):
+        price1 = Price(3, 75)
+        price2 = Price(2, 50)
+        result = add_prices(price1, price2)
+        self.assertEqual(result.dollars, 6)
+        self.assertEqual(result.cents, 25)
 
 
     # Part 5
