@@ -127,8 +127,90 @@ def books_by_author(author_name: str, books: list[Book]) -> list[Book]:
     return [book for book in books if book.author == author_name]
 
 # Part 7
+class Point:
+    def __init__(self, x: float, y: float):
+        self.x = x
+        self.y = y
 
+class Rectangle:
+    def __init__(self, top_left: Point, bottom_right: Point):
+        self.top_left = top_left
+        self.bottom_right = bottom_right
+
+class Circle:
+    def __init__(self, center: Point, radius: float):
+        self.center = center
+        self.radius = radius
+
+import math
+
+def circle_bound(rect: Rectangle) -> Circle:
+    """
+    Computes a bounding circle that fully encloses a given rectangle.
+
+    Inputs:
+        - rect (Rectangle): The rectangle for which to compute the bounding circle.
+
+    Output:
+        - Circle: A Circle object with its center at the rectangle's center and radius equal to the distance
+                  from the center to one of the rectangle's corners.
+    """
+    # Calculate the center of the rectangle
+    x_center = (rect.top_left.x + rect.bottom_right.x) / 2
+    y_center = (rect.top_left.y + rect.bottom_right.y) / 2
+    center = Point(x_center, y_center)
+
+    # Calculate the radius as the distance from the center to the top-left corner
+    radius = math.sqrt((center.x - rect.top_left.x) ** 2 + (center.y - rect.top_left.y) ** 2)
+
+    # Return the Circle object
+    return Circle(center, radius)
+"""
+top_left = Point(1, 5)
+bottom_right = Point(4, 1)
+rect = Rectangle(top_left, bottom_right)
+
+bounding_circle = circle_bound(rect)
+print(f"Center: ({bounding_circle.center.x}, {bounding_circle.center.y}), Radius: {bounding_circle.radius}")
+# Expected output: Center: (2.5, 3.0), Radius: distance from (2.5, 3.0) to (1, 5)
+"""
 
 # Part 8
+class Employee:
+    def __init__(self, name: str, pay: float):
+        self.name = name
+        self.pay = pay
 
+
+def below_pay_average(employees: list[Employee]) -> list[str]:
+    """
+    Returns a list of names of employees whose pay is below the average pay of all employees.
+
+    Inputs:
+        - employees (list[Employee]): A list of Employee objects.
+
+    Output:
+        - list[str]: A list of names of employees with below-average pay.
+    """
+    # Handle an empty list
+    if not employees:
+        return []
+
+    # Calculate total pay and average pay
+    total_pay = sum(employee.pay for employee in employees)
+    average_pay = total_pay / len(employees)
+
+    # Collect names of employees with below-average pay
+    below_average = [employee.name for employee in employees if employee.pay < average_pay]
+
+    return below_average
+"""
+emp1 = Employee("Alice", 50000)
+emp2 = Employee("Bob", 60000)
+emp3 = Employee("Charlie", 40000)
+employees = [emp1, emp2, emp3]
+
+print(below_pay_average(employees))
+# Expected output: ['Alice', 'Charlie'] since the average pay is 50000
+"""
 
