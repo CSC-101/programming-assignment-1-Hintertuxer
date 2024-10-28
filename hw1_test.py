@@ -103,13 +103,68 @@ class TestBooksByAuthor(unittest.TestCase):
         self.assertEqual(result, [])
 
     # Part 7
+from hw1 import circle_bound
+from hw1 import Rectangle, Circle, Point
+import math
+
+class TestCircleBound(unittest.TestCase):
+    def test_circle_bound_standard_case(self):
+        top_left = Point(1, 5)
+        bottom_right = Point(4, 1)
+        rect = Rectangle(top_left, bottom_right)
+        bounding_circle = circle_bound(rect)
+
+        # Expected center and radius
+        expected_center = Point(2.5, 3.0)
+        expected_radius = math.sqrt((2.5 - 1) ** 2 + (3.0 - 5) ** 2)
+
+        # Check center and radius
+        self.assertAlmostEqual(bounding_circle.center.x, expected_center.x, places=5)
+        self.assertAlmostEqual(bounding_circle.center.y, expected_center.y, places=5)
+        self.assertAlmostEqual(bounding_circle.radius, expected_radius, places=5)
+
+    def test_circle_bound_zero_area_rectangle(self):
+        top_left = Point(3, 3)
+        bottom_right = Point(3, 3)
+        rect = Rectangle(top_left, bottom_right)
+        bounding_circle = circle_bound(rect)
+
+        # Expected center and radius
+        expected_center = Point(3, 3)
+        expected_radius = 0.0
+
+        # Check center and radius
+        self.assertAlmostEqual(bounding_circle.center.x, expected_center.x, places=5)
+        self.assertAlmostEqual(bounding_circle.center.y, expected_center.y, places=5)
+        self.assertAlmostEqual(bounding_circle.radius, expected_radius, places=5)
 
 
     # Part 8
+from hw1 import below_pay_average
+from hw1 import Employee
 
+class TestBelowPayAverage(unittest.TestCase):
+    def test_below_pay_average_standard_case(self):
+        emp1 = Employee("Alice", 50000)
+        emp2 = Employee("Bob", 60000)
+        emp3 = Employee("Charlie", 40000)
+        employees = [emp1, emp2, emp3]
+        result = below_pay_average(employees)
+        self.assertEqual(result, ["Alice", "Charlie"])
 
+    def test_below_pay_average_all_above_average(self):
+        emp1 = Employee("Alice", 70000)
+        emp2 = Employee("Bob", 75000)
+        emp3 = Employee("Charlie", 80000)
+        employees = [emp1, emp2, emp3]
+        result = below_pay_average(employees)
+        self.assertEqual(result, [])
 
-
+    def test_below_pay_average_empty_list(self):
+        employees = []
+        result = below_pay_average(employees)
+        self.assertEqual(result, [])
+        
 
 if __name__ == '__main__':
     unittest.main()
