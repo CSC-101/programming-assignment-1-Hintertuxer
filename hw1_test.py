@@ -67,10 +67,40 @@ class TestAddPrices(unittest.TestCase):
 
 
     # Part 5
+from hw1 import rectangle_area, Rectangle, Point
 
+class TestRectangleArea(unittest.TestCase):
+    def test_rectangle_area_standard_case(self):
+        top_left = Point(1, 5)
+        bottom_right = Point(4, 1)
+        rect = Rectangle(top_left, bottom_right)
+        self.assertEqual(rectangle_area(rect), 12)
+
+    def test_rectangle_area_zero_area(self):
+        top_left = Point(3, 3)
+        bottom_right = Point(3, 3)
+        rect = Rectangle(top_left, bottom_right)
+        self.assertEqual(rectangle_area(rect), 0)
 
     # Part 6
+from hw1 import books_by_author
+from hw1 import Book
 
+class TestBooksByAuthor(unittest.TestCase):
+    def test_books_by_author_found(self):
+        book1 = Book("The Great Gatsby", "F. Scott Fitzgerald")
+        book2 = Book("Tender is the Night", "F. Scott Fitzgerald")
+        book3 = Book("To Kill a Mockingbird", "Harper Lee")
+        books = [book1, book2, book3]
+        result = books_by_author("F. Scott Fitzgerald", books)
+        self.assertEqual(result, [book1, book2])
+
+    def test_books_by_author_not_found(self):
+        book1 = Book("The Great Gatsby", "F. Scott Fitzgerald")
+        book2 = Book("Tender is the Night", "F. Scott Fitzgerald")
+        books = [book1, book2]
+        result = books_by_author("Harper Lee", books)
+        self.assertEqual(result, [])
 
     # Part 7
 
